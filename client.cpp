@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <cstring>
 
-using namespace std
+using namespace std;
 
 int main() {
     int sock = 0;
