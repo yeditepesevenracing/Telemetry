@@ -12,7 +12,7 @@ public:
     Client(const string& address, int port);
     ~Client();
     bool connectToServer();
-    bool sendData(const int* dataArray, size_t size) const; // size_t is to send the size of the array
+    bool sendData(const int* dataArray, size_t size) const;
 
 private:
     int sock;
