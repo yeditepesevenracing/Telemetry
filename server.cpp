@@ -4,11 +4,9 @@
 #include <unistd.h>
 #include <csignal>
 
-using namespace std;
-
 bool keepRunning = true;
 
-void signalHandler(int signum) { // Ctrl+c yapana kadar server açık kalrı
+void signalHandler(int signum) { //Server'ı kapatmak için ctrl+c yap
     keepRunning = false;
 }
 
@@ -42,7 +40,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    cout << "Server listening on port " << PORT << endl;
+    std::cout << "Server listening on port " << PORT << std::endl;
 
     while (keepRunning) {
         if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
@@ -51,9 +49,9 @@ int main() {
             exit(EXIT_FAILURE);
         }
 
-        char buffer[1024] = {0};
+        int buffer[1024] = {0};
         int valread = read(new_socket, buffer, 1024);
-        cout << "Received: " << buffer << endl;
+        std::cout << "Received: " << buffer[0]<< std::endl;
 
         const char *response = "Hello from server";
         send(new_socket, response, strlen(response), 0);
@@ -62,7 +60,7 @@ int main() {
     }
 
     close(server_fd);
-    cout << "Server stopped" << endl;
+    std::cout << "Server stopped" << std::endl;
 
     return 0;
 }
